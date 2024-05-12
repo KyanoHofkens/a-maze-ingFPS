@@ -56,10 +56,10 @@ public class ShootController : MonoBehaviour
                     _inArena = true;
 
                     hitPlayer.GetComponent<CharacterController>().enabled = false;
-                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -51.93f);
+                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -38.32f);
 
                     this.gameObject.GetComponent<CharacterController>().enabled = false;
-                    this.transform.position = new Vector3(0.079f, 0.615f, -43.1f);
+                    this.transform.position = new Vector3(0.079f, 0.615f, -58.5f);
 
                     hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
                     this.gameObject.GetComponent<CharacterController>().enabled = true;
