@@ -58,10 +58,10 @@ public class ShootController : MonoBehaviour
                 if (!_inArena)
                 {
                     hitPlayer.GetComponent<CharacterController>().enabled = false;
-                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -51.93f);
+                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -58.62f);
 
                     this.gameObject.GetComponent<CharacterController>().enabled = false;
-                    this.transform.position = new Vector3(0.079f, 0.615f, -43.1f);
+                    this.transform.position = new Vector3(0.079f, 0.615f, -36.92f);
 
                     hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
                     this.gameObject.GetComponent<CharacterController>().enabled = true;
@@ -69,12 +69,21 @@ public class ShootController : MonoBehaviour
                 //damage doen in arena
                 if (_inArena)
                 {
+                    Debug.Log("Hit in arena");
                     _hits++;
                     if (_hits == 3) 
                     {
+                        Debug.Log("3");
                         _hits = 0;
-                        this.transform.position = this.GetComponentInParent<Transform>().transform.position;
-                        hitPlayer.transform.position = hitPlayer.GetComponentInParent<Transform>().transform.position;
+
+                        this.gameObject.GetComponent<CharacterController>().enabled = false;
+                        this.transform.position = new Vector3(1.06f, 0.615f, -23.16f);
+
+                        hitPlayer.GetComponent<CharacterController>().enabled = false;
+                        hitPlayer.transform.position = new Vector3(1.06f, 0.615f, 25.28f);
+
+                        hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
+                        this.gameObject.GetComponent<CharacterController>().enabled = true;
                     }
                 }
             }
@@ -90,7 +99,7 @@ public class ShootController : MonoBehaviour
             Ray ray = mainCamera.ViewportPointToRay(viewPortCenter);
             RaycastHit hit;
 
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 10.0f))
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 5.0f))
             {
                 if ((hit.collider.CompareTag("Pickup")))
                 { 
