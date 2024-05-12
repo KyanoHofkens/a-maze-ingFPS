@@ -12,22 +12,25 @@ public class ShootController : MonoBehaviour
 
     private PlayerInput _playerInput;
 
-    private bool _inArena = false;  
+    private bool _inArena = false;
 
     // Start is called before the first frame update
     void Start()
     {
         _inArena = false;
-        _playerInput = GetComponent<PlayerInput>();   
+        _playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        if (_playerInput.actions["Fire"].WasPressedThisFrame()) 
+        if (this.transform.position.z > 28) { _inArena = true; }
+        if (this.transform.position.z < 28) { _inArena = false; }
+
+        if (_playerInput.actions["Fire"].WasPressedThisFrame())
         {
             Shoot();
+            PickUpItem();
         }
     }
     private void Shoot()
@@ -53,13 +56,11 @@ public class ShootController : MonoBehaviour
                 //teleport naar arena
                 if (!_inArena)
                 {
-                    _inArena = true;
-
                     hitPlayer.GetComponent<CharacterController>().enabled = false;
-                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -38.32f);
+                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -51.93f);
 
                     this.gameObject.GetComponent<CharacterController>().enabled = false;
-                    this.transform.position = new Vector3(0.079f, 0.615f, -58.5f);
+                    this.transform.position = new Vector3(0.079f, 0.615f, -43.1f);
 
                     hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
                     this.gameObject.GetComponent<CharacterController>().enabled = true;
@@ -71,7 +72,31 @@ public class ShootController : MonoBehaviour
 
                 }
             }
-            
+
+        }
+    }
+    private void PickUpItem()
+    {
+        if (_playerInput.actions["Interact"].WasPressedThisFrame())
+        {
+            Vector3 viewPortCenter = new Vector3(.5f, .5f, 100);
+
+            Ray ray = mainCamera.ViewportPointToRay(viewPortCenter);
+            RaycastHit hit;
+
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 10.0f))
+            {
+                if ((hit.collider.CompareTag("Pickup")))
+                { 
+                    Interactable interactable = hit.collider.GetComponent<Interactable>();
+                    if (interactable != null)
+                    {
+                         interactable.Interact();
+                    }
+
+                }
+                
+            }
         }
     }
 }
