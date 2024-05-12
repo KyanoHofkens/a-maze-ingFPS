@@ -33,16 +33,6 @@ namespace StarterAssets
 		[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
 		public float FallTimeout = 0.15f;
 
-		[Header("Player Grounded")]
-		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
-		public bool Grounded = true;
-		[Tooltip("Useful for rough ground")]
-		public float GroundedOffset = -0.14f;
-		[Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-		public float GroundedRadius = 0.5f;
-		[Tooltip("What layers the character uses as ground")]
-		public LayerMask GroundLayers;
-
 		[Header("Cinemachine")]
 		[Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
 		public GameObject CinemachineCameraTarget;
@@ -59,6 +49,7 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
+		private bool Grounded = true;
 
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
@@ -104,29 +95,21 @@ namespace StarterAssets
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
-			// reset our timeouts on start
-			_jumpTimeoutDelta = JumpTimeout;
+            // reset our timeouts on start
+            _jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
 		}
 
 		private void Update()
 		{
+			Grounded = _controller.isGrounded;
 			JumpAndGravity();
-			GroundedCheck();
 			Move();
 		}
 
 		private void LateUpdate()
 		{
 			CameraRotation();
-		}
-
-		private void GroundedCheck()
-		{
-			// set sphere position, with offset
-			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
-			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
 		private void CameraRotation()
@@ -260,9 +243,6 @@ namespace StarterAssets
 
 			if (Grounded) Gizmos.color = transparentGreen;
 			else Gizmos.color = transparentRed;
-
-			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
-			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 	}
 }
