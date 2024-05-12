@@ -50,6 +50,7 @@ namespace StarterAssets
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
 		private bool Grounded = true;
+		private bool _canMove = false;
 
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
@@ -98,13 +99,22 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			_canMove = false;
 		}
 
 		private void Update()
 		{
-			Grounded = _controller.isGrounded;
+            if (_playerInput.actions["Start"].WasPressedThisFrame())
+            {
+				_canMove = true;
+            }
+            Grounded = _controller.isGrounded;
 			JumpAndGravity();
-			Move();
+			if (_canMove)
+			{
+                Move();
+            }
 		}
 
 		private void LateUpdate()

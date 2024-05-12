@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
@@ -10,16 +11,27 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 60.0f;
     private bool timerIsRunning = false;
 
+    private PlayerInput _playerInput;
+
     private void Start()
     {
         // Set the initial time to display
         DisplayTime(timeRemaining);
-        // Start the timer
-        timerIsRunning = true;
     }
 
     private void Update()
     {
+        if(_playerInput == null)
+        {
+            _playerInput = GameObject.FindObjectOfType<PlayerInput>();
+        }
+
+        if (_playerInput.actions["Start"].WasPressedThisFrame())
+        {
+            Debug.Log("Start pressed");
+            timerIsRunning = true;
+        }
+
         if (timerIsRunning)
         {
             // Update the timer
