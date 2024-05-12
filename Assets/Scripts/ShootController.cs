@@ -48,7 +48,7 @@ public class ShootController : MonoBehaviour
                 Debug.Log("Hit player!");
                 // Handle the collision with the player
                 // Get the Player component from the hit object
-                GameObject hitPlayer = hit.collider.gameObject.GetComponentInParent<Transform>().gameObject;
+                GameObject hitPlayer = hit.collider.gameObject;
                 Debug.Log(hitPlayer.name);
                 //teleport naar arena
                 if (!_inArena)
