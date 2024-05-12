@@ -63,7 +63,7 @@ public class Pickups : MonoBehaviour
     }
     private void UpdateScoreText()
     {
-        scoreText.text = "Score: " + score.ToString();
+       // scoreText.text = "Score: " + score.ToString();
     }
     //private void PickUpItem()
     //{
