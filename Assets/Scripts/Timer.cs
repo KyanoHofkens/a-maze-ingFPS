@@ -26,26 +26,29 @@ public class Timer : MonoBehaviour
             _playerInput = GameObject.FindObjectOfType<PlayerInput>();
         }
 
-        if (_playerInput.actions["Start"].WasPressedThisFrame())
+        if(_playerInput != null)
         {
-            Debug.Log("Start pressed");
-            timerIsRunning = true;
-        }
-
-        if (timerIsRunning)
-        {
-            // Update the timer
-            if (timeRemaining > 0)
+            if (_playerInput.actions["Start"].WasPressedThisFrame())
             {
-                timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
+                Debug.Log("Start pressed");
+                timerIsRunning = true;
             }
-            else
+
+            if (timerIsRunning)
             {
-                // Timer has finished
-                Debug.Log("Time has run out!");
-                timeRemaining = 0;
-                timerIsRunning = false;
+                // Update the timer
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                    DisplayTime(timeRemaining);
+                }
+                else
+                {
+                    // Timer has finished
+                    Debug.Log("Time has run out!");
+                    timeRemaining = 0;
+                    timerIsRunning = false;
+                }
             }
         }
     }

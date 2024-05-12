@@ -14,9 +14,12 @@ public class ToggleOnStart: MonoBehaviour
             _playerInput = GameObject.FindObjectOfType<PlayerInput>();
         }
 
-        if (_playerInput.actions["Start"].WasPressedThisFrame())
+        if (_playerInput != null)
         {
-            ToggleThis();
+            if (_playerInput.actions["Start"].WasPressedThisFrame())
+            {
+                ToggleThis();
+            }
         }
     }
     private void ToggleThis()
