@@ -9,7 +9,8 @@ public class ShootController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject _arena;
-
+    private int _hits = 0;
+    private int _score = 0;
     private PlayerInput _playerInput;
 
     private bool _inArena = false;
@@ -24,13 +25,13 @@ public class ShootController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.position.z > 28) { _inArena = true; }
-        if (this.transform.position.z < 28) { _inArena = false; }
+        if (this.transform.position.z < -28) { _inArena = true; }
+        if (this.transform.position.z > -28) { _inArena = false; }
 
+        PickUpItem();
         if (_playerInput.actions["Fire"].WasPressedThisFrame())
         {
-            Shoot();
-            PickUpItem();
+            Shoot();            
         }
     }
     private void Shoot()
@@ -68,8 +69,13 @@ public class ShootController : MonoBehaviour
                 //damage doen in arena
                 if (_inArena)
                 {
-
-
+                    _hits++;
+                    if (_hits == 3) 
+                    {
+                        _hits = 0;
+                        this.transform.position = this.GetComponentInParent<Transform>().transform.position;
+                        hitPlayer.transform.position = hitPlayer.GetComponentInParent<Transform>().transform.position;
+                    }
                 }
             }
 
@@ -92,6 +98,7 @@ public class ShootController : MonoBehaviour
                     if (interactable != null)
                     {
                          interactable.Interact();
+                        _score++;
                     }
 
                 }

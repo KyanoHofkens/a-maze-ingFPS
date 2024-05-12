@@ -18,8 +18,9 @@ public class Pickups : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateScoreText();
+        
         SpawnSpheres();
+        UpdateScoreText();
     }
 
     private void SpawnSpheres()
@@ -58,29 +59,29 @@ public class Pickups : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PickUpItem();
+        //PickUpItem();
     }
     private void UpdateScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
     }
-    private void PickUpItem()
-    {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
-        {
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, _interactionRange, pickupLayerMask))
-            {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                if(interactable != null)
-                {
-                    interactable.Interact();
-                    IncreaseScore();
-                }
-            }
-        }
-    }
+    //private void PickUpItem()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+    //    {
+    //        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+    //        RaycastHit hit;
+    //        if (Physics.Raycast(ray, out hit, _interactionRange, pickupLayerMask))
+    //        {
+    //            Interactable interactable = hit.collider.GetComponent<Interactable>();
+    //            if(interactable != null)
+    //            {
+    //                interactable.Interact();
+    //                IncreaseScore();
+    //            }
+    //        }
+    //    }
+    //}
     public void IncreaseScore()
     {
         score += 1;
