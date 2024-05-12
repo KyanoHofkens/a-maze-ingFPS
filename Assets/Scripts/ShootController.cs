@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ShootController : MonoBehaviour
 {
-    private Camera mainCamera;
-    [SerializeField] PlayerInput _playerInput;
-    [SerializeField] GameObject _player;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject _arena;
+
+    private PlayerInput _playerInput;
 
     private bool _inArena = false;  
 
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
+        _inArena = false;
         _playerInput = GetComponent<PlayerInput>();   
     }
 
@@ -30,14 +33,14 @@ public class ShootController : MonoBehaviour
     private void Shoot()
     {
         // Get the center of the screen
-        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Vector3 viewPortCenter = new Vector3(.5f, .5f, 100);
 
         // Shoot a raycast from the center of the camera
-        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+        Ray ray = mainCamera.ViewportPointToRay(viewPortCenter);
         RaycastHit hit;
 
         // Check if the raycast hits something
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100.0f))
         {
             // Check if the hit object has the "Player" tag
             if (hit.collider.CompareTag("Player"))
@@ -45,21 +48,27 @@ public class ShootController : MonoBehaviour
                 Debug.Log("Hit player!");
                 // Handle the collision with the player
                 // Get the Player component from the hit object
-                GameObject hitPlayer = hit.collider.gameObject;
-
+                GameObject hitPlayer = hit.collider.gameObject.GetComponentInParent<Transform>().gameObject;
+                Debug.Log(hitPlayer.name);
                 //teleport naar arena
                 if (!_inArena)
-                {                    
+                {
                     _inArena = true;
-                    hitPlayer.transform.position = new Vector3(60,0.9f,16);
 
-                    _player.transform.position = new Vector3(60, 0.9f, -16);
+                    hitPlayer.GetComponent<CharacterController>().enabled = false;
+                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -51.93f);
+
+                    this.gameObject.GetComponent<CharacterController>().enabled = false;
+                    this.transform.position = new Vector3(0.079f, 0.615f, -43.1f);
+
+                    hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
+                    this.gameObject.GetComponent<CharacterController>().enabled = true;
                 }
                 //damage doen in arena
-                if(_inArena) 
-                { 
-                
-                
+                if (_inArena)
+                {
+
+
                 }
             }
             
