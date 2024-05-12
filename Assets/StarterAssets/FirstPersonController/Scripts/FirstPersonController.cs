@@ -244,5 +244,5 @@ namespace StarterAssets
 			if (Grounded) Gizmos.color = transparentGreen;
 			else Gizmos.color = transparentRed;
 		}
-	}
+    }
 }
