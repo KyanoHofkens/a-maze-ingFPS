@@ -18,14 +18,15 @@ public class ReadyCheck : MonoBehaviour
     public TMP_Text PressStart;
     public Camera Cam;
     private float _countdownDuration = 5f;
-    public PlayerManager _playerManager;
-    public List<FirstPersonController> _firstPersonController = new List<FirstPersonController>();
+    private PlayerManager _playerManager;
+    private List<FirstPersonController> _firstPersonController = new List<FirstPersonController>();
     
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         InitiateMenu();
+        _playerManager = FindAnyObjectByType<PlayerManager>();
     }
 
     private void InitiateMenu()

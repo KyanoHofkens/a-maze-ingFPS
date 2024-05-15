@@ -13,13 +13,25 @@ public class Pickups : MonoBehaviour
     public LayerMask pickupLayerMask;
     public LayerMask wallLayer;
     public GameObject pickupPrefab;
+    public List<PickupItem> Score = new List<PickupItem>();
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnSpheres();
     }
+    private void Update()
+    {
 
+    }
+    public void AddScore(PickupItem pickUpItem)
+    {
+        Score.Add(pickUpItem);
+    }
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     private void SpawnSpheres()
     {
         for(int i =0; i < _numberOfPickups; i++)

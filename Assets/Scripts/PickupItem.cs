@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,23 +7,31 @@ using UnityEngine.InputSystem;
 
 public class PickupItem : MonoBehaviour
 {
-    [SerializeField] private float _interactionRange = 5f;
+    private float _interactionRange = 5f;
     [SerializeField] private Camera _camera;
     public TMP_Text scoreText;
-    private int score;
+    public int score = 0;
     public LayerMask pickupLayerMask;
-
     private PlayerInput _playerInput;
+    private Pickups _pickups;
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateScoreText();
-        _playerInput = GetComponent<PlayerInput>();
+        
     }
     void Update()
     {
         PickUpItem();
+    }
+
+    private void Awake()
+    {
+        UpdateScoreText();
+        _playerInput = GetComponent<PlayerInput>();
+        _pickups = FindAnyObjectByType<Pickups>();
+        this.gameObject.SetActive(true);
+        _pickups.AddScore(this);
     }
     private void UpdateScoreText()
     {

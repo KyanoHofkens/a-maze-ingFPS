@@ -675,7 +675,6 @@ MonoBehaviour:
   _interactionRange: 2
   _numberOfPickups: 50
   _sphereHeight: 0.62
-  scoreText: {fileID: 0}
   pickupLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -683,6 +682,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   pickupPrefab: {fileID: 1203005397453439115, guid: 498d1ca8d5a70e94a87c22af267dc29e, type: 3}
+  Score: []
 --- !u!4 &353877230
 Transform:
   m_ObjectHideFlags: 0
@@ -1388,8 +1388,6 @@ MonoBehaviour:
   Player4: {fileID: 2074876408}
   PressStart: {fileID: 1149127072}
   Cam: {fileID: 1397351459}
-  _playerManager: {fileID: 173878992}
-  _firstPersonController: []
 --- !u!1001 &984814489
 PrefabInstance:
   m_ObjectHideFlags: 0
