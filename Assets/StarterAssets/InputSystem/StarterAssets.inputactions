@@ -270,6 +270,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4543e083-898f-4f27-83c6-80797adc0e48",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7a98c900-0a70-4359-907d-822ff5eb48bb",
                     "path": "<Gamepad>/start",
                     "interactions": "",

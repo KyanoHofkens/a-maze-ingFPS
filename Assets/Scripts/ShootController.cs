@@ -27,7 +27,6 @@ public class ShootController : MonoBehaviour
         if (this.transform.position.z < -28) { _inArena = true; }
         if (this.transform.position.z > -28) { _inArena = false; }
 
-        PickUpItem();
         if (_playerInput.actions["Fire"].WasPressedThisFrame())
         {
             Shoot();            
@@ -48,7 +47,6 @@ public class ShootController : MonoBehaviour
             // Check if the hit object has the "Player" tag
             if (hit.collider.CompareTag("Player"))
             {
-                Debug.Log("Hit player!");
                 // Handle the collision with the player
                 // Get the Player component from the hit object
                 GameObject hitPlayer = hit.collider.gameObject;
@@ -87,31 +85,6 @@ public class ShootController : MonoBehaviour
                 }
             }
 
-        }
-    }
-    private void PickUpItem()
-    {
-        if (_playerInput.actions["Interact"].WasPressedThisFrame())
-        {
-            Vector3 viewPortCenter = new Vector3(.5f, .5f, 100);
-
-            Ray ray = mainCamera.ViewportPointToRay(viewPortCenter);
-            RaycastHit hit;
-
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 5.0f))
-            {
-                if ((hit.collider.CompareTag("Pickup")))
-                { 
-                    Interactable interactable = hit.collider.GetComponent<Interactable>();
-                    if (interactable != null)
-                    {
-                         interactable.Interact();
-                        _score++;
-                    }
-
-                }
-                
-            }
         }
     }
 }
