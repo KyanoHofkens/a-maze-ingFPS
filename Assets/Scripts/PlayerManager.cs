@@ -33,6 +33,7 @@ public class PlayerManager : MonoBehaviour
     public void AddPlayer(PlayerInput _player)
     {
         _players.Add(_player);
+        Debug.Log(_players.Count);
 
         _player.gameObject.GetComponent<CharacterController>().enabled = false;
 
