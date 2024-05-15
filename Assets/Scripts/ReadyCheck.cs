@@ -1,20 +1,26 @@
+using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ReadyCheck : MonoBehaviour
 {
-    public TMP_Text Timer;
+    public TMP_Text Countdown;
     public TMP_Text Player1;
     public TMP_Text Player2;
     public TMP_Text Player3;
     public TMP_Text Player4;
+    public TMP_Text PressStart;
+    public Camera Cam;
     private float _countdownDuration = 5f;
-    private int _playerCount = 0;
-    private float _countdownTimer;
+    public PlayerManager _playerManager;
+    public List<FirstPersonController> _firstPersonController = new List<FirstPersonController>();
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +30,11 @@ public class ReadyCheck : MonoBehaviour
 
     private void InitiateMenu()
     {
-        Player1.text = "Player 1:";
-        Player2.text = "Player 2:";
-        Player3.text = "Player 3:";
-        Player4.text = "Player 4:";
-        Timer.text = "";
+        Player1.text = "Player 1: not joined";
+        Player2.text = "Player 2: not joined";
+        Player3.text = "Player 3: not joined";
+        Player4.text = "Player 4: not joined";
+        Countdown.text = "";
     }
 
     // Update is called once per frame
@@ -38,58 +44,73 @@ public class ReadyCheck : MonoBehaviour
         Player2Ready();
         Player3Ready();
         Player4Ready();
-        StartCountdown();
+        CountdownCheck();
     }
 
-    private void StartCountdown()
+    private void CountdownCheck()
     {
-        if(_playerCount == 4)
+        if(_playerManager._players.Count >=2 && _playerManager._players[0].actions["Start"].WasPressedThisFrame())
         {
-            _countdownTimer -= Time.deltaTime;
-            Timer.text = Mathf.CeilToInt(_countdownTimer).ToString();
-            if (_countdownTimer <= 0)
-                StartGame();
+            StartCoroutine(StartCountdown());
+                
         }
     }
-
-    private void StartGame()
+    IEnumerator StartCountdown()
     {
-        SceneManager.LoadScene("MainGame");
-    }
-
-    private void Player4Ready()
-    {
-        if (Input.GetKeyDown(KeyCode.Joystick4Button1))
+        float currentTime = _countdownDuration;
+        while(currentTime > 0 )
         {
-            _playerCount++;
-            Player1.text = "Player 4: Ready";
+            Countdown.text = currentTime.ToString();
+            yield return new WaitForSeconds(1f);
+            currentTime--;
+        }
+        Countdown.text = "0";
+        if(currentTime == 0)
+        {
+            Countdown.gameObject.SetActive(false);
+            Player1.gameObject.SetActive(false);
+            Player2.gameObject.SetActive(false);
+            Player3.gameObject.SetActive(false);
+            Player4.gameObject.SetActive(false);
+            PressStart.gameObject.SetActive(false);
+            foreach (FirstPersonController firstPersonController in _firstPersonController)
+                firstPersonController._canMove = true;
         }
     }
-
-    private void Player3Ready()
+    public void RegisterPlayer(FirstPersonController controller)
     {
-        if (Input.GetKeyDown(KeyCode.Joystick3Button1))
+        _firstPersonController.Add(controller);
+    }
+    private void Player1Ready()
+    {
+        if (_playerManager._players.Count >= 1)
         {
-            _playerCount++;
-            Player1.text = "Player 3: Ready";
+            Cam.gameObject.SetActive(false);
+            Player1.text = "Player 1: Joined";
         }
     }
 
     private void Player2Ready()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick2Button1))
+        if (_playerManager._players.Count >=2)
         {
-            _playerCount++;
-            Player1.text = "Player 2: Ready";
+            Player2.text = "Player 2: Joined";
         }
     }
 
-    private void Player1Ready()
+    private void Player3Ready()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (_playerManager._players.Count >= 3)
         {
-            _playerCount++;
-            Player1.text = "Player 1: Ready";
+            Player3.text = "Player 3: Joined";
+        }
+    }
+
+    private void Player4Ready()
+    {
+        if (_playerManager._players.Count == 4)
+        {
+            Player4.text = "Player 4: Joined";
         }
     }
 }

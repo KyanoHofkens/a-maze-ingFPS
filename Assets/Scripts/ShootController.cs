@@ -12,6 +12,7 @@ public class ShootController : MonoBehaviour
     private int _score = 0;
     private PlayerInput _playerInput;
 
+
     private bool _inArena = false;
 
     // Start is called before the first frame update

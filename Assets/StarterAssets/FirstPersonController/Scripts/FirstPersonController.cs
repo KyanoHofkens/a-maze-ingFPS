@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -50,7 +51,7 @@ namespace StarterAssets
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
 		private bool Grounded = true;
-		private bool _canMove = false;
+		public bool _canMove = false;
 
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
@@ -63,6 +64,7 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
+		private ReadyCheck _readyCheck;
 
 		private const float _threshold = 0.01f;
 
@@ -80,6 +82,8 @@ namespace StarterAssets
 
 		private void Awake()
 		{
+			_readyCheck = FindObjectOfType<ReadyCheck>();
+            JoinGame();
 			// get a reference to our main camera
 			if (_mainCamera == null)
 			{
@@ -87,7 +91,12 @@ namespace StarterAssets
 			}
 		}
 
-		private void Start()
+        private void JoinGame()
+        {
+			_readyCheck.RegisterPlayer(this);
+        }
+
+        private void Start()
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
@@ -105,10 +114,10 @@ namespace StarterAssets
 
 		private void Update()
 		{
-            if (_playerInput.actions["Start"].WasPressedThisFrame())
-            {
-				_canMove = true;
-            }
+    //        if (_playerInput.actions["Start"].WasPressedThisFrame())
+    //        {
+				//_canMove = true;
+    //        }
             Grounded = _controller.isGrounded;
 			JumpAndGravity();
 			if (_canMove)

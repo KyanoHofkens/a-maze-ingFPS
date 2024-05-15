@@ -6,13 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-    private List<PlayerInput> _players = new List<PlayerInput>();
+    public List<PlayerInput> _players = new List<PlayerInput>();
     [SerializeField]
     private List<Transform> _startingPoints;
     [SerializeField]
     private List<LayerMask> _playerLayers;
 
     private PlayerInputManager _playerInputManager;
+    public int PlayerCount = 0;
 
     private void Awake()
     {
@@ -47,5 +48,9 @@ public class PlayerManager : MonoBehaviour
         _playerParent.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = _layerToAdd;
         //add the layers
         _playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << _layerToAdd;
+    }
+    public void GetPlayer()
+    {
+
     }
 }

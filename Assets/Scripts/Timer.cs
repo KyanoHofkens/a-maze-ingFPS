@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
     public float timeRemaining = 60.0f;
-    private bool timerIsRunning = false;
+    public bool timerIsRunning = false;
 
     private PlayerInput _playerInput;
 
@@ -28,11 +29,7 @@ public class Timer : MonoBehaviour
 
         if(_playerInput != null)
         {
-            if (_playerInput.actions["Start"].WasPressedThisFrame())
-            {
-                Debug.Log("Start pressed");
-                timerIsRunning = true;
-            }
+            StartCoroutine(StartTimer());
 
             if (timerIsRunning)
             {
@@ -48,9 +45,19 @@ public class Timer : MonoBehaviour
                     Debug.Log("Time has run out!");
                     timeRemaining = 0;
                     timerIsRunning = false;
-                    Application.Quit();
+                    SceneManager.LoadScene("Leaderboard");
                 }
             }
+        }
+    }
+
+    IEnumerator StartTimer()
+    {
+        if (_playerInput.actions["Start"].WasPressedThisFrame())
+        {
+            Debug.Log("Start pressed");
+            yield return new WaitForSeconds(5f);
+            timerIsRunning = true;
         }
     }
 
