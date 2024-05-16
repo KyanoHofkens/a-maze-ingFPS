@@ -483,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.55
+      value: 1.375
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.z
@@ -789,6 +789,10 @@ PrefabInstance:
       propertyPath: _lineRend
       value: 
       objectReference: {fileID: 2029189866963967136}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _crosshair
+      value: 
+      objectReference: {fileID: 7396473559121666635}
     - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: mainCamera
       value: 
