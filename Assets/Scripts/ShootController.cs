@@ -11,6 +11,8 @@ public class ShootController : MonoBehaviour
     private int _hits = 0;
     private int _score = 0;
     private PlayerInput _playerInput;
+    [SerializeField] private LineRenderer _lineRend;
+    [SerializeField] private Transform _gunAim;
 
 
     private bool _inArena = false;
@@ -45,9 +47,13 @@ public class ShootController : MonoBehaviour
         // Check if the raycast hits something
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100.0f))
         {
+            _lineRend.enabled = true;
+            _lineRend.SetPosition(0, _gunAim.transform.position);
+            _lineRend.SetPosition(1, hit.point);
             // Check if the hit object has the "Player" tag
             if (hit.collider.CompareTag("Player"))
             {
+
                 // Handle the collision with the player
                 // Get the Player component from the hit object
                 GameObject hitPlayer = hit.collider.gameObject;
@@ -86,6 +92,10 @@ public class ShootController : MonoBehaviour
                 }
             }
 
+        }
+        else 
+        {
+        _lineRend.enabled = false;
         }
     }
 }
