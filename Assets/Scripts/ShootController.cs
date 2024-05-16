@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ShootController : MonoBehaviour
 {
@@ -11,6 +12,17 @@ public class ShootController : MonoBehaviour
     public int _hits = 0;
     private PlayerInput _playerInput;
     public PickupItem _pickupItem;
+
+    [SerializeField] private LineRenderer _lineRend;
+    [SerializeField] private Transform _gunAim;
+    [SerializeField] private  Image _crosshair;
+
+    private float _liveTimer = 0f;
+    private float _liveTime = .1f;
+
+    private float _crosshairTimer = 0f;
+    private float _crosshairDelay = .3f;
+    private bool _crosshairChanged = false;
 
 
     private bool _inArena = false;
@@ -39,9 +51,33 @@ public class ShootController : MonoBehaviour
         {
             Shoot();            
         }
+
+        if(_crosshairChanged)
+        {
+            _crosshairTimer += Time.deltaTime;
+
+            if(_crosshairTimer >= _crosshairDelay)
+            {
+                _crosshair.color = Color.red;
+                _crosshairChanged = false;
+                _crosshairTimer = 0f;
+            }
+        }
+
+        if (_lineRend.enabled)
+        {
+            _liveTimer += Time.deltaTime;
+
+            if( _liveTimer >= _liveTime)
+            {
+                Debug.Log("Disabled Laser");
+                _lineRend.enabled = false;
+            }
+        }
     }
     private void Shoot()
     {
+        _liveTimer = 0f;
         // Get the center of the screen
         Vector3 viewPortCenter = new Vector3(.5f, .5f, 100);
 
@@ -52,9 +88,16 @@ public class ShootController : MonoBehaviour
         // Check if the raycast hits something
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100.0f))
         {
+            _lineRend.enabled = true;
+            _lineRend.SetPosition(0, _gunAim.transform.position);
+            _lineRend.SetPosition(1, hit.point);
+
             // Check if the hit object has the "Player" tag
             if (hit.collider.CompareTag("Player"))
             {
+                _crosshair.color = Color.blue;
+                _crosshairChanged = true;
+
                 // Handle the collision with the player
                 // Get the Player component from the hit object
                 GameObject hitPlayer = hit.collider.gameObject;
@@ -99,7 +142,6 @@ public class ShootController : MonoBehaviour
                     }
                 }
             }
-
         }
     }
 }
