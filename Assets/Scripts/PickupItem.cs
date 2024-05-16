@@ -33,7 +33,7 @@ public class PickupItem : MonoBehaviour
         this.gameObject.SetActive(true);
         _pickups.AddScore(this);
     }
-    private void UpdateScoreText()
+    public void UpdateScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
     }

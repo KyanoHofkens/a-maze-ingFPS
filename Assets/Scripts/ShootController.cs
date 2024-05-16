@@ -8,9 +8,9 @@ public class ShootController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject _arena;
-    private int _hits = 0;
-    private int _score = 0;
+    public int _hits = 0;
     private PlayerInput _playerInput;
+    public PickupItem _pickupItem;
 
 
     private bool _inArena = false;
@@ -20,6 +20,13 @@ public class ShootController : MonoBehaviour
     {
         _inArena = false;
         _playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void Awake()
+    {
+        _inArena = false;
+        _playerInput = GetComponent<PlayerInput>();
+        _pickupItem = FindObjectOfType<PickupItem>();
     }
 
     // Update is called once per frame
@@ -73,6 +80,13 @@ public class ShootController : MonoBehaviour
                     {
                         Debug.Log("3");
                         _hits = 0;
+                        hitPlayer.GetComponent<ShootController>()._hits = 0;
+
+                        int score = hitPlayer.GetComponent<PickupItem>().score / 2;
+                        this.GetComponent<PickupItem>().score += score;
+                        hitPlayer.GetComponent<PickupItem>().score = score;
+                        this.GetComponent<PickupItem>().UpdateScoreText();
+                        hitPlayer.GetComponent<PickupItem>().UpdateScoreText();
 
                         this.gameObject.GetComponent<CharacterController>().enabled = false;
                         this.transform.position = new Vector3(1.06f, 0.615f, -23.16f);
