@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
@@ -13,6 +11,8 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning = false;
 
     private PlayerInput _playerInput;
+
+    public bool _startTimer = false;
 
     private void Start()
     {
@@ -53,7 +53,7 @@ public class Timer : MonoBehaviour
 
     IEnumerator StartTimer()
     {
-        if (_playerInput.actions["Start"].WasPressedThisFrame())
+        if (_startTimer)
         {
             Debug.Log("Start pressed");
             yield return new WaitForSeconds(5f);

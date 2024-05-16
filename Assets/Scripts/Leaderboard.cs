@@ -88,7 +88,7 @@ public class Leaderboard : MonoBehaviour
 
     private void Restart()
     {
-        if (_playerInput.actions["Start"].WasPressedThisFrame())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("MainGame");
         }

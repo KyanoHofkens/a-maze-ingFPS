@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 173878991}
   - component: {fileID: 173878990}
   - component: {fileID: 173878992}
+  - component: {fileID: 173878993}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -161,7 +162,7 @@ MonoBehaviour:
   m_NotificationBehavior: 3
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -169,7 +170,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_JoinAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
       m_Name: Join
       m_Type: 0
@@ -179,7 +180,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -1916377846673030204, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
   m_PlayerPrefab: {fileID: 3603188239537808056, guid: 07a1856ab7ad9d046a780e579d830186, type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
@@ -233,6 +234,18 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 512
   PlayerCount: 0
+--- !u!114 &173878993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173878989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee2249147a9fc34e9a820faf810add4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &238743381
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +913,7 @@ MonoBehaviour:
   timerText: {fileID: 681875166}
   timeRemaining: 180
   timerIsRunning: 0
+  _startTimer: 0
 --- !u!4 &492015861
 Transform:
   m_ObjectHideFlags: 0
@@ -1089,7 +1103,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'A-Maze-Ing FPS
 
-    Press any button to join
+    Press X to join
 
 '
   m_isRightToLeft: 0
@@ -1388,6 +1402,7 @@ MonoBehaviour:
   Player4: {fileID: 2074876408}
   PressStart: {fileID: 1149127072}
   Cam: {fileID: 1397351459}
+  _timer: {fileID: 492015860}
 --- !u!1001 &984814489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1492,7 +1507,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -190, y: -439}
-  m_SizeDelta: {x: 1000, y: 100}
+  m_SizeDelta: {x: 1500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149127071
 MonoBehaviour:
@@ -1526,7 +1541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press "Start" to start (min. 2 players)
+  m_text: 'Player 1: press "Start" to start (min. 2 players)
 
 '
   m_isRightToLeft: 0

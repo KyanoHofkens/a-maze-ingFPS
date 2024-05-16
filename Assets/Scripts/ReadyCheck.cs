@@ -1,12 +1,8 @@
 using StarterAssets;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ReadyCheck : MonoBehaviour
 {
@@ -20,6 +16,9 @@ public class ReadyCheck : MonoBehaviour
     private float _countdownDuration = 5f;
     private PlayerManager _playerManager;
     private List<FirstPersonController> _firstPersonController = new List<FirstPersonController>();
+
+    [SerializeField]
+    private Timer _timer;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +52,7 @@ public class ReadyCheck : MonoBehaviour
         if(_playerManager._players.Count >=2 && _playerManager._players[0].actions["Start"].WasPressedThisFrame())
         {
             StartCoroutine(StartCountdown());
-                
+            _timer._startTimer = true;
         }
     }
     IEnumerator StartCountdown()
