@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
         int _layerToAdd = (int)Mathf.Log(_playerLayers[_players.Count - 1].value, 2);
 
         //set the layer
+        _playerParent.gameObject.layer = _layerToAdd;
         _playerParent.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = _layerToAdd;
         //add the layers
         _playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << _layerToAdd;
