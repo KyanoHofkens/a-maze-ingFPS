@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 173878991}
   - component: {fileID: 173878990}
   - component: {fileID: 173878992}
-  - component: {fileID: 173878993}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -234,18 +233,6 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 512
   PlayerCount: 0
---- !u!114 &173878993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173878989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee2249147a9fc34e9a820faf810add4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &238743381
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cff8280f870f44496d48c185f9f92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionRange: 2
   _numberOfPickups: 50
   _sphereHeight: 0.62
   pickupLayerMask:
@@ -911,7 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 681875166}
-  timeRemaining: 180
+  timeRemaining: 15
   timerIsRunning: 0
   _startTimer: 0
 --- !u!4 &492015861

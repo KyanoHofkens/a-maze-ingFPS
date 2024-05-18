@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -45,6 +46,8 @@ public class Timer : MonoBehaviour
                     Debug.Log("Time has run out!");
                     timeRemaining = 0;
                     timerIsRunning = false;
+
+                    //EditorSceneManager.LoadScene("Assets/Scenes/Leaderboard.unity", LoadSceneMode.Single);
                     SceneManager.LoadScene("Leaderboard");
                 }
             }

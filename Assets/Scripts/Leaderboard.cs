@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -90,6 +91,7 @@ public class Leaderboard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //EditorSceneManager.LoadScene("Assets/Scenes/MainGame.unity", LoadSceneMode.Single);
             SceneManager.LoadScene("MainGame");
         }
     }

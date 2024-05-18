@@ -105,6 +105,17 @@
                 },
                 {
                     "name": "",
+                    "id": "168ca2a6-3087-45fc-aa13-7d19b0ffa1f1",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c8fcd86e-dcfd-4f88-8e93-b638cdbf3320",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",

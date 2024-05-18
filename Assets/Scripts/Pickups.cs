@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Pickups : MonoBehaviour
 {
-    [SerializeField] private float _interactionRange = 5f;
     [SerializeField] private int _numberOfPickups;
     [SerializeField] private float _sphereHeight = 0.62f;
     public LayerMask pickupLayerMask;
