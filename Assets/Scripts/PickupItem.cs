@@ -76,6 +76,11 @@ public class PickupItem : MonoBehaviour
         if (_scene.name == "MainGameRepeat")
         {
             this.score = 0;
+            UpdateScoreText();
+            _playerInput = GetComponent<PlayerInput>();
+            _pickups = FindAnyObjectByType<Pickups>();
+            this.gameObject.SetActive(true);
+            _pickups.AddScore(this);
         }
     }
 }
