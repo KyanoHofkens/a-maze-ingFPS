@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: 2a1c04256f9ab084ea7f59a27468ef30
+  - enabled: 1
+    path: Assets/Scenes/MainGameRepeat.unity
+    guid: a4c42e186746f494291148dcbc9f86c4
   m_configObjects: {}

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.SceneManagement;
 using StarterAssets;
 
