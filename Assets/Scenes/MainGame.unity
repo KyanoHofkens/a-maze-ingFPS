@@ -897,7 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 681875166}
-  timeRemaining: 15
+  timeRemaining: 60
   timerIsRunning: 0
   _startTimer: 0
 --- !u!4 &492015861

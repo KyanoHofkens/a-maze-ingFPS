@@ -104,9 +104,11 @@ public class ShootController : MonoBehaviour
                 {
                     hitPlayer.GetComponent<CharacterController>().enabled = false;
                     hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -58.62f);
+                    hitPlayer.transform.rotation = Quaternion.Euler(0,0,0);
 
                     this.gameObject.GetComponent<CharacterController>().enabled = false;
                     this.transform.position = new Vector3(0.079f, 0.615f, -36.92f);
+                    this.transform.rotation = Quaternion.Euler(0,180,0);
 
                     hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
                     this.gameObject.GetComponent<CharacterController>().enabled = true;
