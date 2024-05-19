@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PickupItem : MonoBehaviour
 {
@@ -15,11 +17,16 @@ public class PickupItem : MonoBehaviour
     private PlayerInput _playerInput;
     private Pickups _pickups;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void Update()
     {
         PickUpItem();
@@ -61,5 +68,14 @@ public class PickupItem : MonoBehaviour
         Debug.Log("increased score");
         score += 1;
         UpdateScoreText();
+    }
+
+    private void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
+    {
+        Debug.Log(_scene.name);
+        if (_scene.name == "MainGameRepeat")
+        {
+            this.score = 0;
+        }
     }
 }

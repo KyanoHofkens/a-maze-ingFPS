@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.SceneManagement;
+using StarterAssets;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -16,17 +19,22 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        _playerInputManager = FindObjectOfType<PlayerInputManager>();
+        if(_playerInputManager == null)
+        {
+            _playerInputManager = FindObjectOfType<PlayerInputManager>();
+        }
     }
 
     private void OnEnable()
     {
         _playerInputManager.onPlayerJoined += AddPlayer;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         _playerInputManager.onPlayerJoined -= AddPlayer;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public void AddPlayer(PlayerInput _player)
@@ -50,8 +58,26 @@ public class PlayerManager : MonoBehaviour
         //add the layers
         _playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << _layerToAdd;
     }
-    public void GetPlayer()
-    {
 
+    private void TeleportExistingPlayers()
+    {
+        for(int i = 0; i< _players.Count; i++)
+        {
+            _players[i].gameObject.GetComponent<CharacterController>().enabled = false;
+
+            Transform _playerParent = _players[i].transform.parent;
+            _playerParent.position = _startingPoints[i].position;
+
+            _players[i].gameObject.GetComponent<CharacterController>().enabled = true;
+        }
+    }
+
+    private void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
+    {
+        Debug.Log(_scene.name);
+        if (_scene.name == "MainGameRepeat")
+        {
+            TeleportExistingPlayers();
+        }
     }
 }

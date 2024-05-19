@@ -91,8 +91,8 @@ public class Leaderboard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //EditorSceneManager.LoadScene("Assets/Scenes/MainGame.unity", LoadSceneMode.Single);
-            SceneManager.LoadScene("MainGame");
+            //EditorSceneManager.LoadScene("Assets/Scenes/MainGameRepeat.unity", LoadSceneMode.Single);
+            SceneManager.LoadScene("MainGameRepeat");
         }
     }
 }

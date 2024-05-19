@@ -82,18 +82,12 @@ namespace StarterAssets
 		private void Awake()
 		{
 			_readyCheck = FindObjectOfType<ReadyCheck>();
-            JoinGame();
 			// get a reference to our main camera
 			if (_mainCamera == null)
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
 		}
-
-        private void JoinGame()
-        {
-			_readyCheck.RegisterPlayer(this);
-        }
 
         private void Start()
 		{

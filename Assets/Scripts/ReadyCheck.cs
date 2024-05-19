@@ -87,6 +87,7 @@ public class ReadyCheck : MonoBehaviour
         {
             Cam.gameObject.SetActive(false);
             Player1.text = "Player 1: Joined";
+            RegisterPlayer(_playerManager._players[0].GetComponent<FirstPersonController>());
         }
     }
 
@@ -95,6 +96,7 @@ public class ReadyCheck : MonoBehaviour
         if (_playerManager._players.Count >=2)
         {
             Player2.text = "Player 2: Joined";
+            RegisterPlayer(_playerManager._players[1].GetComponent<FirstPersonController>());
         }
     }
 
@@ -103,6 +105,7 @@ public class ReadyCheck : MonoBehaviour
         if (_playerManager._players.Count >= 3)
         {
             Player3.text = "Player 3: Joined";
+            RegisterPlayer(_playerManager._players[2].GetComponent<FirstPersonController>());
         }
     }
 
@@ -111,6 +114,7 @@ public class ReadyCheck : MonoBehaviour
         if (_playerManager._players.Count == 4)
         {
             Player4.text = "Player 4: Joined";
+            RegisterPlayer(_playerManager._players[3].GetComponent<FirstPersonController>());
         }
     }
 }

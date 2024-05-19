@@ -1,5 +1,7 @@
+using StarterAssets;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pickups : MonoBehaviour
 {
@@ -10,22 +12,24 @@ public class Pickups : MonoBehaviour
     public GameObject pickupPrefab;
     public List<PickupItem> Score = new List<PickupItem>();
 
-    // Start is called before the first frame update
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+
     void Start()
     {
         SpawnSpheres();
     }
-    private void Update()
-    {
-
-    }
     public void AddScore(PickupItem pickUpItem)
     {
         Score.Add(pickUpItem);
-    }
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
     }
     private void SpawnSpheres()
     {
@@ -58,6 +62,15 @@ public class Pickups : MonoBehaviour
         float randomX = Random.Range(-26f, 26f);
         float randomZ = Random.Range(-26f, 26f);
         return new Vector3(randomX, _sphereHeight, randomZ);
+    }
+
+    private void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
+    {
+        Debug.Log(_scene.name);
+        if (_scene.name == "MainGameRepeat")
+        {
+            Score.Clear();
+        }
     }
 }
 
