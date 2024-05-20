@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    public float timeRemaining = 60.0f;
+    [SerializeField] private float timeRemaining;
     public bool timerIsRunning = false;
 
     private PlayerInput _playerInput;

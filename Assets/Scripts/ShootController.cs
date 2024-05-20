@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -6,13 +8,15 @@ public class ShootController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject _arena;
-    public int _hits = 0;
+    public int Hits = 0;
     private PlayerInput _playerInput;
-    public PickupItem _pickupItem;
+    public PickupItem PickupItem;
 
     [SerializeField] private LineRenderer _lineRend;
     [SerializeField] private Transform _gunAim;
     [SerializeField] private  Image _crosshair;
+    public TMP_Text ScoreDifference;
+    public RectTransform ScoreTransform;
 
     private float _liveTimer = 0f;
     private float _liveTime = .1f;
@@ -35,7 +39,8 @@ public class ShootController : MonoBehaviour
     {
         _inArena = false;
         _playerInput = GetComponent<PlayerInput>();
-        _pickupItem = FindObjectOfType<PickupItem>();
+        PickupItem = FindObjectOfType<PickupItem>();
+        ScoreDifference.text = "";
     }
 
     // Update is called once per frame
@@ -117,18 +122,14 @@ public class ShootController : MonoBehaviour
                 if (_inArena)
                 {
                     Debug.Log("Hit in arena");
-                    _hits++;
-                    if (_hits == 3) 
+                    Hits++;
+                    if (Hits >= 3) 
                     {
                         Debug.Log("3");
-                        _hits = 0;
-                        hitPlayer.GetComponent<ShootController>()._hits = 0;
+                        Hits = 0;
+                        hitPlayer.GetComponent<ShootController>().Hits = 0;
 
-                        int score = hitPlayer.GetComponent<PickupItem>().score / 2;
-                        this.GetComponent<PickupItem>().score += score;
-                        hitPlayer.GetComponent<PickupItem>().score = score;
-                        this.GetComponent<PickupItem>().UpdateScoreText();
-                        hitPlayer.GetComponent<PickupItem>().UpdateScoreText();
+                        int score = hitPlayer.GetComponent<PickupItem>().Score / 2;
 
                         this.gameObject.GetComponent<CharacterController>().enabled = false;
                         this.transform.position = new Vector3(1.06f, 0.615f, -23.16f);
@@ -138,9 +139,38 @@ public class ShootController : MonoBehaviour
 
                         hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
                         this.gameObject.GetComponent<CharacterController>().enabled = true;
+
+                        this.ShowPointChange(score, true);
+                        hitPlayer.GetComponent<ShootController>().ShowPointChange(score, false);
+                        this.GetComponent<PickupItem>().Score += score;
+                        //this.GetComponent<PickupItem>().UpdateScoreText();
+                        hitPlayer.GetComponent<PickupItem>().Score -= score;
+                        //hitPlayer.GetComponent<PickupItem>().UpdateScoreText();
                     }
                 }
             }
         }
+    }
+    public void ShowPointChange(int score, bool isWinner)
+    {
+        ScoreDifference.text = (isWinner ? "+" : "-") + score.ToString();
+        ScoreDifference.color = isWinner ? Color.green : Color.red;
+        StartCoroutine("MoveScore");
+    }
+    IEnumerator MoveScore()
+    {
+        Vector2 startPosition = ScoreDifference.rectTransform.anchoredPosition;
+        Vector2 endPosition = ScoreTransform.anchoredPosition;
+        float duration = 1.5f;
+        float elapsedTime = 0f;
+        while(elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            ScoreDifference.rectTransform.anchoredPosition = Vector2.Lerp(startPosition, endPosition, elapsedTime / duration);
+            yield return null;
+        }
+        ScoreDifference.rectTransform.anchoredPosition = startPosition;
+        ScoreDifference.text = "";
+        GetComponent<PickupItem>().UpdateScoreText();
     }
 }

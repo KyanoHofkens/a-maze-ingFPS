@@ -11,8 +11,8 @@ public class PickupItem : MonoBehaviour
 {
     private float _interactionRange = 5f;
     [SerializeField] private Camera _camera;
-    public TMP_Text scoreText;
-    public int score = 0;
+    public TMP_Text ScoreText;
+    public int Score = 0;
     public LayerMask pickupLayerMask;
     private PlayerInput _playerInput;
     private Pickups _pickups;
@@ -42,7 +42,7 @@ public class PickupItem : MonoBehaviour
     }
     public void UpdateScoreText()
     {
-        scoreText.text = "Score: " + score.ToString();
+        ScoreText.text = "Score: " + Score.ToString();
     }
     private void PickUpItem()
     {
@@ -66,7 +66,7 @@ public class PickupItem : MonoBehaviour
     public void IncreaseScore()
     {
         Debug.Log("increased score");
-        score += 1;
+        Score += 1;
         UpdateScoreText();
     }
 
@@ -75,7 +75,7 @@ public class PickupItem : MonoBehaviour
         Debug.Log(_scene.name);
         if (_scene.name == "MainGameRepeat")
         {
-            this.score = 0;
+            this.Score = 0;
             UpdateScoreText();
             _playerInput = GetComponent<PlayerInput>();
             _pickups = FindAnyObjectByType<Pickups>();
