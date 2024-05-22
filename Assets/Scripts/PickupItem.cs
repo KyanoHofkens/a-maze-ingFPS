@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class PickupItem : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class PickupItem : MonoBehaviour
     public LayerMask pickupLayerMask;
     private PlayerInput _playerInput;
     private Pickups _pickups;
+
+    [SerializeField] private Image _crosshair;
+    [SerializeField] private Sprite _interactButton;
+    private Sprite _crosshairOriginal;
+    private Vector2 _crosshairOriginalSize;
 
     private void OnEnable()
     {
@@ -35,6 +41,9 @@ public class PickupItem : MonoBehaviour
 
     private void Awake()
     {
+        _crosshairOriginal = _crosshair.sprite;
+        _crosshairOriginalSize = _crosshair.rectTransform.sizeDelta;
+
         UpdateScoreText();
         _playerInput = GetComponent<PlayerInput>();
         _pickups = FindAnyObjectByType<Pickups>();
@@ -48,14 +57,27 @@ public class PickupItem : MonoBehaviour
     }
     private void PickUpItem()
     {
-        if (_playerInput.actions["Interact"].WasPressedThisFrame())
+        Ray ray = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, _interactionRange))
         {
-            Ray ray = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, _interactionRange, pickupLayerMask))
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
+            if(interactable != null)
+            {
+                _crosshair.sprite = _interactButton;
+                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize * 10;
+                _crosshair.color = Color.white;
+            }
+            else
+            {
+                _crosshair.sprite = _crosshairOriginal;
+                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize;
+                _crosshair.color = Color.red;
+            }
+            if (_playerInput.actions["Interact"].WasPressedThisFrame())
             {
                 Debug.Log("got here");
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                
                 if (interactable != null)
                 {
                     interactable.Interact();

@@ -1186,9 +1186,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8078119971994942690}
     - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _crosshair
+      value: 
+      objectReference: {fileID: 7396473559121666635}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: ScoreAboveHead
       value: 
       objectReference: {fileID: 1479468757268763446}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _interactButton
+      value: 
+      objectReference: {fileID: 21300000, guid: d06fca0c477ede946afa85de7f0c5c07, type: 3}
     - target: {fileID: 5072418933122287246, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_CastShadows
       value: 0
