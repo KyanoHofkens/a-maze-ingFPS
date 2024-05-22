@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f596f20d6d3d7d643ae32760f475555a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 0}
+  timerText: {fileID: 1589928955}
   timeRemaining: 180
   timerIsRunning: 0
   _startTimer: 0
@@ -902,7 +902,6 @@ GameObject:
   - component: {fileID: 1362281624}
   - component: {fileID: 1362281623}
   - component: {fileID: 1362281621}
-  - component: {fileID: 1362281622}
   m_Layer: 5
   m_Name: Start text
   m_TagString: Untagged
@@ -1001,18 +1000,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1362281622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362281620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c5bd80b186d6854bb0a5eb382311695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1362281623
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1345,8 +1332,8 @@ MonoBehaviour:
   Player4: {fileID: 2105203533}
   PressStart: {fileID: 1362281621}
   Controls: {fileID: 354291681}
-  Cam: {fileID: 0}
-  _timer: {fileID: 0}
+  Cam: {fileID: 1397351459}
+  _timer: {fileID: 492015860}
 --- !u!114 &1729762230
 MonoBehaviour:
   m_ObjectHideFlags: 0

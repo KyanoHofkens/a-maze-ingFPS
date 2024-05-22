@@ -60,6 +60,13 @@ public class ReadyCheck : MonoBehaviour
     }
     IEnumerator StartCountdown()
     {
+        Player1.gameObject.SetActive(false);
+        Player2.gameObject.SetActive(false);
+        Player3.gameObject.SetActive(false);
+        Player4.gameObject.SetActive(false);
+
+        PressStart.text = "\"They're coming! Everyone for themselves!\"";
+
         float currentTime = _countdownDuration;
         while(currentTime > 0 )
         {
@@ -71,10 +78,6 @@ public class ReadyCheck : MonoBehaviour
         if(currentTime == 0)
         {
             Countdown.gameObject.SetActive(false);
-            Player1.gameObject.SetActive(false);
-            Player2.gameObject.SetActive(false);
-            Player3.gameObject.SetActive(false);
-            Player4.gameObject.SetActive(false);
             PressStart.gameObject.SetActive(false);
             foreach (FirstPersonController firstPersonController in _firstPersonController)
                 firstPersonController._canMove = true;

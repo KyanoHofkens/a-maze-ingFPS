@@ -43,7 +43,7 @@ public class PickupItem : MonoBehaviour
     }
     public void UpdateScoreText()
     {
-        ScoreText.text = "Score: " + Score.ToString();
+        ScoreText.text = "Food: " + Score.ToString();
         ScoreAboveHead.text = Score.ToString();
     }
     private void PickUpItem()
