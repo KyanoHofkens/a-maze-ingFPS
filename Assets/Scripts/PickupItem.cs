@@ -13,10 +13,14 @@ public class PickupItem : MonoBehaviour
     [SerializeField] private Camera _camera;
     public TMP_Text ScoreText;
     public TMP_Text ScoreAboveHead;
+    public TMP_Text PointAnim;
+    public RectTransform TargetTransform;
     public int Score = 0;
     public LayerMask pickupLayerMask;
     private PlayerInput _playerInput;
     private Pickups _pickups;
+    private Vector2 _startPosition;
+    private int _pointsPickedUp;
 
     private void OnEnable()
     {
@@ -40,6 +44,8 @@ public class PickupItem : MonoBehaviour
         _pickups = FindAnyObjectByType<Pickups>();
         this.gameObject.SetActive(true);
         _pickups.AddScore(this);
+        _startPosition = PointAnim.rectTransform.anchoredPosition;
+        _pointsPickedUp = 0;
     }
     public void UpdateScoreText()
     {
@@ -59,16 +65,30 @@ public class PickupItem : MonoBehaviour
                 if (interactable != null)
                 {
                     interactable.Interact();
-                    this.IncreaseScore();
+                    _pointsPickedUp++;
+                    PointAnim.text = "+" + _pointsPickedUp.ToString();
+                    StartCoroutine("IncreaseScore");
                     Debug.Log("picked up item");
                 }
             }
         }
     }
-    public void IncreaseScore()
+    IEnumerator IncreaseScore()
     {
         Debug.Log("increased score");
-        Score += 1;
+        Vector2 endPosition = TargetTransform.anchoredPosition;
+        float duration = 1f;
+        float elapsedTime = 0;
+        while(elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            PointAnim.rectTransform.anchoredPosition = Vector2.Lerp(_startPosition, endPosition, elapsedTime / duration);
+            yield return null;
+        }
+        PointAnim.rectTransform.anchoredPosition = _startPosition;
+        PointAnim.text = "";
+        Score += _pointsPickedUp;
+        _pointsPickedUp = 0;
         UpdateScoreText();
     }
 
