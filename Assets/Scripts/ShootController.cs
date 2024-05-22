@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -29,8 +30,11 @@ public class ShootController : MonoBehaviour
     private bool _crosshairChanged = false;
     private Vector2 _crosshairOriginalSize;
 
+    public TMP_Text FightText;
+    private int fightTimer=0;
+    public GameObject FightTextObject;
 
-    private bool _inArena = false;
+    public bool _inArena = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +43,9 @@ public class ShootController : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         _crosshairSprite = _crosshair.sprite;
         _crosshairOriginalSize = _crosshair.rectTransform.sizeDelta;
+        FightText.text = "Fight";
+
+        FightTextObject.SetActive(false);
     }
 
     private void Awake()
@@ -54,6 +61,7 @@ public class ShootController : MonoBehaviour
     {
         if (this.transform.position.z < -28) { _inArena = true; }
         if (this.transform.position.z > -28) { _inArena = false; }
+        ArenaChecker();
 
         if (_playerInput.actions["Fire"].WasPressedThisFrame())
         {
@@ -84,6 +92,26 @@ public class ShootController : MonoBehaviour
             }
         }
     }
+
+    private void ArenaChecker()
+    {
+        
+        if(_inArena & fightTimer <= 40) 
+        {            
+            FightTextObject.SetActive(true);
+            fightTimer++;
+        }
+        if(fightTimer > 40) 
+        { 
+        FightTextObject.SetActive(false);
+        }       
+
+        if(!_inArena & fightTimer > 0) 
+        {
+            fightTimer = 0;
+        }
+    }
+
     private void Shoot()
     {
         _liveTimer = 0f;
