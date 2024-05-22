@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 619e305f5165a9946b7f72464e44ca4a, type: 3}
   m_Sun: {fileID: 2114283754330233425}
-  m_IndirectSpecularColor: {r: 0.1727952, g: 0.2600245, b: 0.36693013, a: 1}
+  m_IndirectSpecularColor: {r: 0.17041335, g: 0.2565443, b: 0.3636499, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -777,7 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 681875166}
-  timeRemaining: 15
+  timeRemaining: 180
   timerIsRunning: 0
   _startTimer: 0
 --- !u!4 &492015861
@@ -1267,6 +1267,7 @@ MonoBehaviour:
   Player3: {fileID: 238743383}
   Player4: {fileID: 2074876408}
   PressStart: {fileID: 1149127072}
+  Controls: {fileID: 0}
   Cam: {fileID: 1397351459}
   _timer: {fileID: 492015860}
 --- !u!1001 &984814489
@@ -1894,14 +1895,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114283753834967212}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.12364155, y: 0.13493109, z: -0.059897117, w: 0.9812842}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2114283754330233426}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 15, z: -5}
 --- !u!1 &2114283754330233424
 GameObject:
   m_ObjectHideFlags: 0
