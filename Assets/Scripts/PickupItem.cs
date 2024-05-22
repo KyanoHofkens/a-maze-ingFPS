@@ -65,7 +65,7 @@ public class PickupItem : MonoBehaviour
             if(interactable != null)
             {
                 _crosshair.sprite = _interactButton;
-                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize * 10;
+                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize * 5;
                 _crosshair.color = Color.white;
             }
             else
