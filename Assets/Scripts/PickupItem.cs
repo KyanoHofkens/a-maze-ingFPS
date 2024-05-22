@@ -91,6 +91,9 @@ public class PickupItem : MonoBehaviour
                 if (interactable != null)
                 {
                     interactable.Interact();
+                    _crosshair.sprite = _crosshairOriginal;
+                    _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize;
+                    _crosshair.color = Color.red;
                     _pointsPickedUp++;
                     PointAnim.text = "+" + _pointsPickedUp.ToString();
                     StartCoroutine("IncreaseScore");
