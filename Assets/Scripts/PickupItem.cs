@@ -131,7 +131,6 @@ public class PickupItem : MonoBehaviour
             _playerInput = GetComponent<PlayerInput>();
             _pickups = FindAnyObjectByType<Pickups>();
             this.gameObject.SetActive(true);
-            _pickups.AddScore(this);
         }
     }
 }

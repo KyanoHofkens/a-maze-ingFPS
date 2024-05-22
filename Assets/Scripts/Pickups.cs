@@ -12,17 +12,6 @@ public class Pickups : MonoBehaviour
     public GameObject pickupPrefab;
     public List<PickupItem> Score = new List<PickupItem>();
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-
     void Start()
     {
         SpawnSpheres();
@@ -62,15 +51,6 @@ public class Pickups : MonoBehaviour
         float randomX = Random.Range(-26f, 26f);
         float randomZ = Random.Range(-26f, 26f);
         return new Vector3(randomX, _sphereHeight, randomZ);
-    }
-
-    private void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
-    {
-        Debug.Log(_scene.name);
-        if (_scene.name == "MainGameRepeat")
-        {
-            Score.Clear();
-        }
     }
 }
 
