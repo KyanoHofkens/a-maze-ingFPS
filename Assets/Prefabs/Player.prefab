@@ -1046,6 +1046,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2648878650886940531}
     - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _hitmarkerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f98eeed90df8987409d93cf8f6a1bc13, type: 3}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: TextRectTransform
       value: 
       objectReference: {fileID: 4580237135017411782}
