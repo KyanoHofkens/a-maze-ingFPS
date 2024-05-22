@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -21,9 +22,12 @@ public class ShootController : MonoBehaviour
     private float _liveTimer = 0f;
     private float _liveTime = .1f;
 
+    [SerializeField] private Sprite _hitmarkerSprite;
+    private Sprite _crosshairSprite;
     private float _crosshairTimer = 0f;
     private float _crosshairDelay = .3f;
     private bool _crosshairChanged = false;
+    private Vector2 _crosshairOriginalSize;
 
 
     private bool _inArena = false;
@@ -33,6 +37,8 @@ public class ShootController : MonoBehaviour
     {
         _inArena = false;
         _playerInput = GetComponent<PlayerInput>();
+        _crosshairSprite = _crosshair.sprite;
+        _crosshairOriginalSize = _crosshair.rectTransform.sizeDelta;
     }
 
     private void Awake()
@@ -60,7 +66,8 @@ public class ShootController : MonoBehaviour
 
             if(_crosshairTimer >= _crosshairDelay)
             {
-                _crosshair.color = Color.red;
+                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize;
+                _crosshair.sprite = _crosshairSprite;
                 _crosshairChanged = false;
                 _crosshairTimer = 0f;
             }
@@ -97,7 +104,8 @@ public class ShootController : MonoBehaviour
             // Check if the hit object has the "Player" tag
             if (hit.collider.CompareTag("Player"))
             {
-                _crosshair.color = Color.blue;
+                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize * 10;
+                _crosshair.sprite = _hitmarkerSprite;
                 _crosshairChanged = true;
 
                 // Handle the collision with the player
@@ -108,11 +116,11 @@ public class ShootController : MonoBehaviour
                 if (!_inArena)
                 {
                     hitPlayer.GetComponent<CharacterController>().enabled = false;
-                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -58.62f);
+                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -61.62f);
                     hitPlayer.transform.rotation = Quaternion.Euler(0,0,0);
 
                     this.gameObject.GetComponent<CharacterController>().enabled = false;
-                    this.transform.position = new Vector3(0.079f, 0.615f, -36.92f);
+                    this.transform.position = new Vector3(0.079f, 0.615f, -33.92f);
                     this.transform.rotation = Quaternion.Euler(0,180,0);
 
                     hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
