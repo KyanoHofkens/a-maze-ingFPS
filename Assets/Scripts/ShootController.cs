@@ -31,7 +31,7 @@ public class ShootController : MonoBehaviour
     private Vector2 _crosshairOriginalSize;
 
     public TMP_Text FightText;
-    private int fightTimer=0;
+    private float fightTimer=0;
     public GameObject FightTextObject;
 
     public bool _inArena = false;
@@ -96,12 +96,12 @@ public class ShootController : MonoBehaviour
     private void ArenaChecker()
     {
         
-        if(_inArena & fightTimer <= 40) 
+        if(_inArena & fightTimer <= 1) 
         {            
             FightTextObject.SetActive(true);
-            fightTimer++;
+            fightTimer += Time.deltaTime;
         }
-        if(fightTimer > 40) 
+        if(fightTimer > 1) 
         { 
         FightTextObject.SetActive(false);
         }       
