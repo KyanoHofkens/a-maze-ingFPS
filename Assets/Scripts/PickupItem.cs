@@ -13,7 +13,7 @@ public class PickupItem : MonoBehaviour
     private float _interactionRange = 5f;
     [SerializeField] private Camera _camera;
     public TMP_Text ScoreText;
-    public TMP_Text ScoreAboveHead;
+    public TMP_Text ScoreAboveHead;    
     public int Score = 0;
     public LayerMask pickupLayerMask;
     private PlayerInput _playerInput;
@@ -23,6 +23,7 @@ public class PickupItem : MonoBehaviour
     [SerializeField] private Sprite _interactButton;
     private Sprite _crosshairOriginal;
     private Vector2 _crosshairOriginalSize;
+    
 
     private void OnEnable()
     {
@@ -37,7 +38,10 @@ public class PickupItem : MonoBehaviour
     void Update()
     {
         PickUpItem();
+       
     }
+
+    
 
     private void Awake()
     {
