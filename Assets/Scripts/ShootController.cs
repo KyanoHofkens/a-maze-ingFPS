@@ -132,56 +132,59 @@ public class ShootController : MonoBehaviour
             // Check if the hit object has the "Player" tag
             if (hit.collider.CompareTag("Player"))
             {
-                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize * 10;
-                _crosshair.sprite = _hitmarkerSprite;
-                _crosshairChanged = true;
-
-                // Handle the collision with the player
-                // Get the Player component from the hit object
-                GameObject hitPlayer = hit.collider.gameObject;
-                Debug.Log(hitPlayer.name);
-                //teleport naar arena
-                if (!_inArena)
+                if(hit.collider.gameObject != this.gameObject)
                 {
-                    hitPlayer.GetComponent<CharacterController>().enabled = false;
-                    hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -61.62f);
-                    hitPlayer.transform.rotation = Quaternion.Euler(0,0,0);
+                    _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize * 10;
+                    _crosshair.sprite = _hitmarkerSprite;
+                    _crosshairChanged = true;
 
-                    this.gameObject.GetComponent<CharacterController>().enabled = false;
-                    this.transform.position = new Vector3(0.079f, 0.615f, -33.92f);
-                    this.transform.rotation = Quaternion.Euler(0,180,0);
-
-                    hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
-                    this.gameObject.GetComponent<CharacterController>().enabled = true;
-                }
-                //damage doen in arena
-                if (_inArena)
-                {
-                    Debug.Log("Hit in arena");
-                    Hits++;
-                    if (Hits >= 3) 
+                    // Handle the collision with the player
+                    // Get the Player component from the hit object
+                    GameObject hitPlayer = hit.collider.gameObject;
+                    Debug.Log(hitPlayer.name);
+                    //teleport naar arena
+                    if (!_inArena)
                     {
-                        Debug.Log("3");
-                        Hits = 0;
-                        hitPlayer.GetComponent<ShootController>().Hits = 0;
-
-                        int score = hitPlayer.GetComponent<PickupItem>().Score / 2;
+                        hitPlayer.GetComponent<CharacterController>().enabled = false;
+                        hitPlayer.transform.position = new Vector3(0.079f, 0.615f, -61.62f);
+                        hitPlayer.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                         this.gameObject.GetComponent<CharacterController>().enabled = false;
-                        this.transform.position = new Vector3(1.06f, 0.615f, -23.16f);
-
-                        hitPlayer.GetComponent<CharacterController>().enabled = false;
-                        hitPlayer.transform.position = new Vector3(1.06f, 0.615f, 25.28f);
+                        this.transform.position = new Vector3(0.079f, 0.615f, -33.92f);
+                        this.transform.rotation = Quaternion.Euler(0, 180, 0);
 
                         hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
                         this.gameObject.GetComponent<CharacterController>().enabled = true;
+                    }
+                    //damage doen in arena
+                    if (_inArena)
+                    {
+                        Debug.Log("Hit in arena");
+                        Hits++;
+                        if (Hits >= 3)
+                        {
+                            Debug.Log("3");
+                            Hits = 0;
+                            hitPlayer.GetComponent<ShootController>().Hits = 0;
 
-                        this.ShowPointChange(score, true);
-                        hitPlayer.GetComponent<ShootController>().ShowPointChange(score, false);
-                        this.GetComponent<PickupItem>().Score += score;
-                        //this.GetComponent<PickupItem>().UpdateScoreText();
-                        hitPlayer.GetComponent<PickupItem>().Score -= score;
-                        //hitPlayer.GetComponent<PickupItem>().UpdateScoreText();
+                            int score = hitPlayer.GetComponent<PickupItem>().Score / 2;
+
+                            this.gameObject.GetComponent<CharacterController>().enabled = false;
+                            this.transform.position = new Vector3(1.06f, 0.615f, -23.16f);
+
+                            hitPlayer.GetComponent<CharacterController>().enabled = false;
+                            hitPlayer.transform.position = new Vector3(1.06f, 0.615f, 25.28f);
+
+                            hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
+                            this.gameObject.GetComponent<CharacterController>().enabled = true;
+
+                            this.ShowPointChange(score, true);
+                            hitPlayer.GetComponent<ShootController>().ShowPointChange(score, false);
+                            this.GetComponent<PickupItem>().Score += score;
+                            //this.GetComponent<PickupItem>().UpdateScoreText();
+                            hitPlayer.GetComponent<PickupItem>().Score -= score;
+                            //hitPlayer.GetComponent<PickupItem>().UpdateScoreText();
+                        }
                     }
                 }
             }
