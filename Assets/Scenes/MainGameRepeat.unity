@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f596f20d6d3d7d643ae32760f475555a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 0}
+  timerText: {fileID: 1589928955}
   timeRemaining: 180
   timerIsRunning: 0
   _startTimer: 0
@@ -1345,8 +1345,8 @@ MonoBehaviour:
   Player4: {fileID: 2105203533}
   PressStart: {fileID: 1362281621}
   Controls: {fileID: 354291681}
-  Cam: {fileID: 0}
-  _timer: {fileID: 0}
+  Cam: {fileID: 1397351459}
+  _timer: {fileID: 492015860}
 --- !u!114 &1729762230
 MonoBehaviour:
   m_ObjectHideFlags: 0
