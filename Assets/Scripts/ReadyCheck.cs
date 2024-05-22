@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReadyCheck : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ReadyCheck : MonoBehaviour
     public TMP_Text Player3;
     public TMP_Text Player4;
     public TMP_Text PressStart;
+    public RawImage Controls;
     public Camera Cam;
     private float _countdownDuration = 5f;
     private PlayerManager _playerManager;
@@ -51,6 +53,7 @@ public class ReadyCheck : MonoBehaviour
     {
         if(_playerManager._players.Count >=2 && _playerManager._players[0].actions["Start"].WasPressedThisFrame())
         {
+            Controls.gameObject.SetActive(false);
             StartCoroutine(StartCountdown());
             _timer._startTimer = true;
         }
