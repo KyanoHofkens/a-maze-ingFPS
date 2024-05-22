@@ -12,6 +12,7 @@ public class PickupItem : MonoBehaviour
     private float _interactionRange = 5f;
     [SerializeField] private Camera _camera;
     public TMP_Text ScoreText;
+    public TMP_Text ScoreAboveHead;
     public int Score = 0;
     public LayerMask pickupLayerMask;
     private PlayerInput _playerInput;
@@ -43,6 +44,7 @@ public class PickupItem : MonoBehaviour
     public void UpdateScoreText()
     {
         ScoreText.text = "Score: " + Score.ToString();
+        ScoreAboveHead.text = Score.ToString();
     }
     private void PickUpItem()
     {
