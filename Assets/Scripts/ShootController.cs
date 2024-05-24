@@ -10,7 +10,6 @@ public class ShootController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject _arena;
-    public int Hits = 0;
     private PlayerInput _playerInput;
     public PickupItem PickupItem;
 
@@ -165,14 +164,10 @@ public class ShootController : MonoBehaviour
                     //damage doen in arena
                     if (_inArena)
                     {
-                        Debug.Log("Hit in arena");
-                        Hits++;
-                        if (Hits >= 3)
+                        HealthController hitHealthController = hitPlayer.GetComponent<HealthController>();
+                        hitHealthController.TakeDamage(1);
+                        if(hitHealthController.GetHealth() <= 0) 
                         {
-                            Debug.Log("3");
-                            Hits = 0;
-                            hitPlayer.GetComponent<ShootController>().Hits = 0;
-
                             int score = hitPlayer.GetComponent<PickupItem>().Score / 2;
 
                             this.gameObject.GetComponent<CharacterController>().enabled = false;
@@ -190,6 +185,13 @@ public class ShootController : MonoBehaviour
                             //this.GetComponent<PickupItem>().UpdateScoreText();
                             hitPlayer.GetComponent<PickupItem>().Score -= score;
                             //hitPlayer.GetComponent<PickupItem>().UpdateScoreText();
+
+                            //reset player's health
+                            this.GetComponent<HealthController>().ResetHealth();
+                            hitHealthController.ResetHealth();
+
+                            //change material color back to original
+
                         }
                     }
                 }
