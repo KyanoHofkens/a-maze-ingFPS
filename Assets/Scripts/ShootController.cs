@@ -24,6 +24,7 @@ public class ShootController : MonoBehaviour
     private float _liveTime = .1f;
 
     [SerializeField] private Sprite _hitmarkerSprite;
+    [SerializeField] private Sprite _R2Sprite;
     private Sprite _crosshairSprite;
     private float _crosshairTimer = 0f;
     private float _crosshairDelay = .3f;
@@ -62,6 +63,11 @@ public class ShootController : MonoBehaviour
         if (this.transform.position.z < -28) { _inArena = true; }
         if (this.transform.position.z > -28) { _inArena = false; }
         ArenaChecker();
+
+        if(!_crosshairChanged)
+        {
+            LookingAtEnemyCheck();
+        }
 
         if (_playerInput.actions["Fire"].WasPressedThisFrame())
         {
@@ -211,5 +217,33 @@ public class ShootController : MonoBehaviour
         ScoreDifference.rectTransform.anchoredPosition = startPosition;
         ScoreDifference.text = "";
         GetComponent<PickupItem>().UpdateScoreText();
+    }
+
+    private void LookingAtEnemyCheck()
+    {
+        Vector3 viewPortCenter = new Vector3(.5f, .5f, 100);
+
+        Ray ray = mainCamera.ViewportPointToRay(viewPortCenter);
+        RaycastHit hit;
+
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100.0f))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                if (hit.collider.gameObject != this.gameObject)
+                {
+                    _crosshair.color = Color.white;
+                    _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize * 5;
+                    _crosshair.sprite = _R2Sprite;
+
+                }
+            }
+            else if (!_crosshairChanged)
+            {
+                _crosshair.color = Color.red;
+                _crosshair.rectTransform.sizeDelta = _crosshairOriginalSize;
+                _crosshair.sprite = _crosshairSprite;
+            }
+        }
     }
 }

@@ -1552,6 +1552,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7198496819257385931}
     - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _R2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d075001b4e3f8bf4a9da6da4e84b1668, type: 3}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: _lineRend
       value: 
       objectReference: {fileID: 2029189866963967136}
