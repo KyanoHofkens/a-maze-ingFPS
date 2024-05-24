@@ -1669,6 +1669,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3641339783749878848}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+--- !u!1 &1194992896490301548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5393215578589016642, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 6507133339492538926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!120 &2029189866963967136 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 5072418933122287246, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
@@ -1696,6 +1701,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c848e240b6ca247a645cd7b0e38921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullHealthMaterial: {fileID: 2100000, guid: fad7661ac6b4dda498cb32933eeeba50, type: 2}
+  _halfHealthMaterial: {fileID: 2100000, guid: 2781aca97d1d5d94486a5d7853509aaa, type: 2}
+  _lowHealthMaterial: {fileID: 2100000, guid: 59924be39e9964a4f8f04217994ca320, type: 2}
+  _capsule: {fileID: 1194992896490301548}
 --- !u!114 &3641339783749878848
 MonoBehaviour:
   m_ObjectHideFlags: 0

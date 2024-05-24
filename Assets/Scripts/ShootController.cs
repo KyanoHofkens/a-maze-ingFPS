@@ -189,9 +189,6 @@ public class ShootController : MonoBehaviour
                             //reset player's health
                             this.GetComponent<HealthController>().ResetHealth();
                             hitHealthController.ResetHealth();
-
-                            //change material color back to original
-
                         }
                     }
                 }

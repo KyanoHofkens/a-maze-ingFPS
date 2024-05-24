@@ -58,7 +58,7 @@ public class Timer : MonoBehaviour
     {
         if (_startTimer)
         {
-            Debug.Log("Start pressed");
+            //Debug.Log("Start pressed");
             yield return new WaitForSeconds(5f);
             timerIsRunning = true;
         }
