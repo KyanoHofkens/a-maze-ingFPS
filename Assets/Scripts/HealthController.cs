@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class HealthController : MonoBehaviour
     [SerializeField] private Material _lowHealthMaterial;
 
     [SerializeField] private GameObject _capsule;
+
+    [SerializeField] private GameObject _hearts;
+    [SerializeField] private Image _heart1;
+    [SerializeField] private Image _heart2;
+    [SerializeField] private Image _heart3;
+    [SerializeField] private Sprite _fullHeart;
+    [SerializeField] private Sprite _emptyHeart;
 
     private int _maxHealth = 3;
     private int _currentHealth;
@@ -28,6 +36,7 @@ public class HealthController : MonoBehaviour
     {
         _currentHealth -= damage;
         ChangeColorBasedOnHealth();
+        ChangeAmountOfHearts();
     }
 
     public int GetHealth() { return _currentHealth; }
@@ -49,5 +58,34 @@ public class HealthController : MonoBehaviour
             Debug.Log("red");
             _capsule.GetComponent<Renderer>().material = _lowHealthMaterial;
         }
+    }
+
+    private void ChangeAmountOfHearts()
+    {
+        switch (_currentHealth)
+        {
+            case 3:
+                _heart1.sprite = _fullHeart;
+                _heart2.sprite = _fullHeart;
+                _heart3.sprite = _fullHeart;
+                break;
+            case 2:
+                _heart1.sprite = _emptyHeart;
+                break;
+            case 1:
+                _heart1.sprite = _emptyHeart;
+                _heart2.sprite = _emptyHeart;
+                break;
+            case 0:
+                _heart1.sprite = _emptyHeart;
+                _heart2.sprite = _emptyHeart;
+                _heart3.sprite = _emptyHeart;
+                break;
+        }
+    }
+
+    public void ToggleHearts()
+    {
+        _hearts.SetActive(!_hearts.activeSelf);
     }
 }

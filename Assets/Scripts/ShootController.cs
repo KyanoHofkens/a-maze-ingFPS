@@ -160,6 +160,10 @@ public class ShootController : MonoBehaviour
 
                         hitPlayer.GetComponentInParent<CharacterController>().enabled = true;
                         this.gameObject.GetComponent<CharacterController>().enabled = true;
+
+                        // toggle the hearts to visible
+                        this.GetComponent<HealthController>().ToggleHearts();
+                        hitPlayer.GetComponent<HealthController>().ToggleHearts();
                     }
                     //damage doen in arena
                     if (_inArena)
@@ -189,6 +193,10 @@ public class ShootController : MonoBehaviour
                             //reset player's health
                             this.GetComponent<HealthController>().ResetHealth();
                             hitHealthController.ResetHealth();
+
+                            // toggle hearts to invisible
+                            this.GetComponent<HealthController>().ToggleHearts();
+                            hitHealthController.ToggleHearts();
                         }
                     }
                 }
