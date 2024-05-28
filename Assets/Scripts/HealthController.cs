@@ -30,6 +30,7 @@ public class HealthController : MonoBehaviour
     public void ResetHealth()
     {
         _currentHealth = _maxHealth;
+        ChangeColorBasedOnHealth();
     }
 
     public void TakeDamage(int damage)
