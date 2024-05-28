@@ -31,6 +31,7 @@ public class HealthController : MonoBehaviour
     {
         _currentHealth = _maxHealth;
         ChangeColorBasedOnHealth();
+        ChangeAmountOfHearts();
     }
 
     public void TakeDamage(int damage)
