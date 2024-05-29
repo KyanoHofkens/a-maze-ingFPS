@@ -19,8 +19,8 @@ public class ReadyCheck : MonoBehaviour
     private PlayerManager _playerManager;
     private List<FirstPersonController> _firstPersonController = new List<FirstPersonController>();
 
-    [SerializeField]
-    private Timer _timer;
+    [SerializeField] private Timer _timer;
+    [SerializeField] private AudioClip _warningSoundClip;
     
     // Start is called before the first frame update
     void Start()
@@ -66,6 +66,7 @@ public class ReadyCheck : MonoBehaviour
         Player4.gameObject.SetActive(false);
 
         PressStart.text = "\"They're coming! Everyone for themselves!\"";
+        SoundFxManager.Instance.PlaySoundClip(_warningSoundClip, this.transform, 1f);
 
         float currentTime = _countdownDuration;
         while(currentTime > 0 )

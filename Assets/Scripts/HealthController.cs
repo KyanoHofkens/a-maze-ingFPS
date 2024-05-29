@@ -22,6 +22,8 @@ public class HealthController : MonoBehaviour
     private int _maxHealth = 3;
     private int _currentHealth;
 
+    [SerializeField] private AudioClip[] _hurtSoundClips;
+
     private void Start()
     {
         _currentHealth = _maxHealth;
@@ -39,6 +41,7 @@ public class HealthController : MonoBehaviour
         _currentHealth -= damage;
         ChangeColorBasedOnHealth();
         ChangeAmountOfHearts();
+        SoundFxManager.Instance.PlayRandomSoundClip(_hurtSoundClips, this.transform, 1f);
     }
 
     public int GetHealth() { return _currentHealth; }

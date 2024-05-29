@@ -15,7 +15,7 @@ public class ShootController : MonoBehaviour
 
     [SerializeField] private LineRenderer _lineRend;
     [SerializeField] private Transform _gunAim;
-    [SerializeField] private  Image _crosshair;
+    [SerializeField] private Image _crosshair;
     public TMP_Text ScoreDifference;
     public RectTransform ScoreTransform;
 
@@ -31,10 +31,13 @@ public class ShootController : MonoBehaviour
     private Vector2 _crosshairOriginalSize;
 
     public TMP_Text FightText;
-    private float fightTimer=0;
+    private float fightTimer = 0;
     public GameObject FightTextObject;
 
     public bool _inArena = false;
+
+    [SerializeField] private AudioClip[] _shootSoundClips;
+    [SerializeField] private AudioClip _fightSoundClip;
 
     // Start is called before the first frame update
     void Start()
@@ -119,6 +122,8 @@ public class ShootController : MonoBehaviour
 
     private void Shoot()
     {
+        SoundFxManager.Instance.PlayRandomSoundClip(_shootSoundClips, this.transform, 1f);
+
         _liveTimer = 0f;
         // Get the center of the screen
         Vector3 viewPortCenter = new Vector3(.5f, .5f, 100);
@@ -164,6 +169,8 @@ public class ShootController : MonoBehaviour
                         // toggle the hearts to visible
                         this.GetComponent<HealthController>().ToggleHearts();
                         hitPlayer.GetComponent<HealthController>().ToggleHearts();
+
+                        SoundFxManager.Instance.PlaySoundClip(_fightSoundClip, this.transform, 1f);
                     }
                     //damage doen in arena
                     if (_inArena)

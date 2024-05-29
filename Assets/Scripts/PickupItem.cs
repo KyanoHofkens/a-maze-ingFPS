@@ -27,6 +27,8 @@ public class PickupItem : MonoBehaviour
     [SerializeField] private Sprite _interactButton;
     private Sprite _crosshairOriginal;
     private Vector2 _crosshairOriginalSize;
+
+    [SerializeField] private AudioClip[] _pickupSoundClips;
     
 
     private void OnEnable()
@@ -42,7 +44,6 @@ public class PickupItem : MonoBehaviour
     void Update()
     {
         PickUpItem();
-       
     }
 
     
@@ -98,6 +99,7 @@ public class PickupItem : MonoBehaviour
                     PointAnim.text = "+" + _pointsPickedUp.ToString();
                     StartCoroutine("IncreaseScore");
                     Debug.Log("picked up item");
+                    SoundFxManager.Instance.PlayRandomSoundClip(_pickupSoundClips, this.transform, 1f);
                 }
             }
         }

@@ -1747,6 +1747,38 @@ PrefabInstance:
       propertyPath: _interactButton
       value: 
       objectReference: {fileID: 21300000, guid: d06fca0c477ede946afa85de7f0c5c07, type: 3}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bfc5c972b9edd4c43ab5f662a43cfbd6, type: 3}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ebdb20bb8c863e40baa79b536babafc, type: 3}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a29b61c2d236f984eb66a2cd019cea6f, type: 3}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 49769a464c8774c459b178229f96313d, type: 3}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: abe1808fc8fe5b74e981a40321d318ac, type: 3}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 105afb63aa9033b40a26c5898c4207c8, type: 3}
+    - target: {fileID: 133242344762496250, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _pickupSoundClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6b78ea782319c3549820c60287dc527c, type: 3}
     - target: {fileID: 5072418933122287246, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -1856,6 +1888,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2648878650886940531}
     - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _fightSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b00aa54ca801031489d8b1ad550ccd3e, type: 3}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: _hitmarkerSprite
       value: 
       objectReference: {fileID: 21300000, guid: f98eeed90df8987409d93cf8f6a1bc13, type: 3}
@@ -1863,6 +1899,22 @@ PrefabInstance:
       propertyPath: TextRectTransform
       value: 
       objectReference: {fileID: 4580237135017411782}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _shootSoundClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _shootSoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e7348b9eecc0a774894133dfca8e2d0f, type: 3}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _shootSoundClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f71416ba09830f4ebfaa8a35a2b14e9, type: 3}
+    - target: {fileID: 5404903568078857052, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _shootSoundClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 227bfdd3054c9814989d4342ba55c3cf, type: 3}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: RotationSpeed
       value: 0.5
@@ -1979,6 +2031,12 @@ MonoBehaviour:
   _heart3: {fileID: 949859349394970400}
   _fullHeart: {fileID: 21300000, guid: f32e59d195527604aa4027f78ae04269, type: 3}
   _emptyHeart: {fileID: 21300000, guid: 3e8eed14c834ba841b3250861b3b7592, type: 3}
+  _hurtSoundClips:
+  - {fileID: 8300000, guid: 6f603b5f31eef0c44a7910d6769c73bc, type: 3}
+  - {fileID: 8300000, guid: 86cc5340a1de08644a36a5b6386b3bee, type: 3}
+  - {fileID: 8300000, guid: f0f0861abcb62324697e5b7b5a102870, type: 3}
+  - {fileID: 8300000, guid: bb973e47dc39953448bb901f9410ca53, type: 3}
+  - {fileID: 8300000, guid: 28c0f530d0d63c546a42ae018e54df08, type: 3}
 --- !u!114 &3641339783749878848
 MonoBehaviour:
   m_ObjectHideFlags: 0
